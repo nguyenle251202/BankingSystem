@@ -70,11 +70,11 @@ public class MainMenu {
                 break;
             case 2:
                 System.out.println("\n--- Deposit Account ---");
-                System.out.println("Deposit Account functionality not fully implemented yet.");
+                MenuDeposit.menuDeposit(scanner, accountList);
                 break;
             case 3:
                 System.out.println("\n--- Withdraw Account ---");
-                System.out.println("Withdraw Account functionality not fully implemented yet.");
+                MenuWithdraw.menuWithdraw(scanner, accountList);
                 break;
             case 4:
                 System.out.println("\n--- Check Amount ---");
