@@ -34,7 +34,6 @@ public class MainMenu {
         System.out.println("[2] - Deposit account");
         System.out.println("[3] - Withdraw account");
         System.out.println("[4] - Check amount");
-        System.out.println("[5] - Search AccountNumber");
         System.out.println("[0] - Exit Application");
         System.out.print("Chon chuc nang: ");
     }
@@ -46,7 +45,7 @@ public class MainMenu {
                 choice = scanner.nextInt();
                 scanner.nextLine();
 
-                if (choice >= 0 && choice <= 7) {
+                if (choice >= 0 && choice <= 4) {
                     return choice;
                 } else {
                     System.out.println("Lua chon khong hop le. Vui long chon tu 0 den 6.");
@@ -76,20 +75,8 @@ public class MainMenu {
                 System.out.println("\n--- Withdraw Account ---");
                 MenuWithdraw.menuWithdraw(scanner, accountList);
                 break;
-            case 4:
-                System.out.println("\n--- Check Amount ---");
-                System.out.println("Check Amount functionality not fully implemented yet.");
-                break;
-            case 5:
-                System.out.println("\n--- Search AccountNumber ---");
-                System.out.println("Search AccountNumber functionality not fully implemented yet.");
-                break;
-            case 6:
-                System.out.println("\n--- Skip time ---");
-                break;
-
             // Complete View
-            case 7:
+            case 4:
                 System.out.println("\n--- View all data ---");
                 View.displayAccountList(accountList);
                 break;
