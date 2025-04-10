@@ -18,6 +18,13 @@ public class BankAccount {
         this.balance = initialBalance;
     }
 
+    public BankAccount() {
+
+    }
+
+    public BankAccount(String accountNumber, String ownerName, double balance) {
+    }
+
     // Getters
     public String getId() {
         return id;
@@ -59,20 +66,23 @@ public class BankAccount {
                 '}';
     }
 
-    public boolean withdraw(double amount) {
-        if (amount > 0 && balance >= amount) {
-            balance -= amount;
-            return true;
+    //deposit
+    public void deposit (double amount){
+        if (amount >= 0) {
+            balance += amount;
+            System.out.println("Deposited " + amount + " to " + ownerName);
+        } else {
+            System.out.println("Cannot deposit " + amount + " to " + ownerName + " because the amount is negative");
         }
-        return false;
     }
 
-    public void deposit(double amount) {
-        if (amount <= 0) {
-            throw new IllegalArgumentException("Deposit amount must be positive.");
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= getBalance() + 2000) {
+            setBalance(getBalance() - amount);
+            System.out.println("Withdrawn " + amount + " successfully.");
+        } else {
+            System.out.println("Amount exceeds overdraft limit or invalid. Overdraft limit: " + 2000 );
         }
-        this.balance += amount;
-
     }
 
 }

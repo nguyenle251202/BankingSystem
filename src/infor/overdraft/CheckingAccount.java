@@ -3,20 +3,37 @@ package infor.overdraft;
 import infor.BankAccount;
 
 public class CheckingAccount extends BankAccount {
-    private double overdraftLimit;
+    public double overdraftLimit = 2000;
 
-    public CheckingAccount(String id ,String accountNumber, String ownerName, double balance, double overdraftLimit) {
-        super(id, accountNumber, ownerName, balance);
+    public CheckingAccount() {
+        super();
+    }
+
+    public CheckingAccount(String accountNumber, String ownerName, double balance , double overdraftLimit) {
+        super(accountNumber, ownerName, balance);
         this.overdraftLimit = overdraftLimit;
     }
 
     @Override
-    public boolean withdraw(double amount) {
-        if (amount > 0 && (balance + overdraftLimit) >= amount) {
-            balance -= amount;
-            return true;
+    public void withdraw(double amount) {
+        if (amount > 0 && amount <= getBalance() + overdraftLimit) {
+            setBalance(getBalance() - amount);
+            System.out.println("Withdrawn " + amount + " successfully.");
+        } else {
+            System.out.println("Amount exceeds overdraft limit or invalid. Overdraft limit: " + overdraftLimit );
         }
-        return false;
+    }
+
+    public double getOverdraftLimit() {
+        return overdraftLimit;
+    }
+
+    public void setOverdraftLimit(double overdraftLimit) {
+        this.overdraftLimit = overdraftLimit;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + ", Type: Checking, Overdraft Limit: " + overdraftLimit;
     }
 }
-
