@@ -67,14 +67,19 @@ public class MainMenu {
                 System.out.println("\n--- Add Account ---");
                 MenuAdd.addAccount(scanner, accountList);
                 break;
+
+            // Complete Deposit
             case 2:
                 System.out.println("\n--- Deposit Account ---");
                 MenuDeposit.menuDeposit(scanner, accountList);
                 break;
+
+            // Complete Withdraw
             case 3:
                 System.out.println("\n--- Withdraw Account ---");
                 MenuWithdraw.menuWithdraw(scanner, accountList);
                 break;
+
             // Complete View
             case 4:
                 System.out.println("\n--- View all data ---");
