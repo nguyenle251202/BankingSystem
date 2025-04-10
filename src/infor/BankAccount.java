@@ -1,17 +1,28 @@
 package infor;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class BankAccount {
+
+    private static final AtomicInteger idCounter = new AtomicInteger(1);
+
+    private String id;
     private String accountNumber;
     private String ownerName;
-    private double balance;
+    protected double balance;
 
-    public BankAccount(String accountNumber, String ownerName, double initialBalance) {
+    public BankAccount(String id ,String accountNumber, String ownerName, double initialBalance) {
+        this.id = String.format("EX%03d", idCounter.getAndIncrement());
         this.accountNumber = accountNumber;
         this.ownerName = ownerName;
         this.balance = initialBalance;
     }
 
     // Getters
+    public String getId() {
+        return id;
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -41,9 +52,18 @@ public class BankAccount {
     @Override
     public String toString() {
         return "BankAccount{" +
+                "id='" + id + '\'' +
                 "accountNumber='" + accountNumber + '\'' +
                 ", ownerName='" + ownerName + '\'' +
                 ", balance=" + balance +
                 '}';
+    }
+
+    public boolean withdraw(double amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+            return true;
+        }
+        return false;
     }
 }
