@@ -10,6 +10,7 @@ public class MenuDeposit {
     public static void menuDeposit(Scanner scanner, List<BankAccount> accountList) {
         System.out.println("\n--- Deposit ---");
 
+        // InvalidAmountException
         if (accountList.isEmpty()) {
             System.out.println("No accounts found in the system. Cannot deposit.");
             return;

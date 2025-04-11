@@ -3,11 +3,10 @@ package infor.interest_rate;
 import infor.BankAccount;
 
 public class SavingsAccount extends BankAccount {
-    private double interestRate;
+    public double interestRate = 0.05 ;
 
-    public SavingsAccount(String id ,String accountNumber, String ownerName, double initialBalance, double interestRate) {
-        // Call the UPDATED BankAccount constructor with 3 arguments
-        super(id, accountNumber, ownerName, initialBalance);
+    public SavingsAccount(String accountNumber, String ownerName, double balance, double interestRate) {
+        super(accountNumber, ownerName, balance);
         this.interestRate = interestRate;
     }
 }

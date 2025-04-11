@@ -71,6 +71,8 @@ public class MenuWithdraw {
     private static void withdrawAmount(Scanner scanner, BankAccount account) {
         System.out.print("Enter the Amount to withdraw from (e.g., EX00x): ");
         double amount = -1;
+
+        // add InvalidAmountException
         while (amount <= 0) {
             System.out.print("Enter the amount must be withdraw (must be positive): ");
             String input = scanner.nextLine().trim();

@@ -7,9 +7,9 @@ public class View {
     public static List<BankAccount> getInitialAccountData() {
         List<BankAccount> initialList = new ArrayList<>();
 
-        initialList.add(new BankAccount(null, "ex2-001", "Nguyen Van A", 1000000));
+        initialList.add(new BankAccount(null, "ex2-001", "Nguyen Van A", 100));
         initialList.add(new BankAccount(null, "ex2-002", "Tran Van B", 100));
-        initialList.add(new BankAccount(null, "ex2-003", "Le Thi C", 500));
+        initialList.add(new BankAccount(null, "ex2-003", "Le Thi C", 100));
         return initialList;
     }
 

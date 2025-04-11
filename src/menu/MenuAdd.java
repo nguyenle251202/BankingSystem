@@ -29,6 +29,7 @@ public class MenuAdd {
             }
         }
 
+        // try - catch - finally
         while (initialBalance <= 10) {
             System.out.print("\nEnter balance: ");
             try {

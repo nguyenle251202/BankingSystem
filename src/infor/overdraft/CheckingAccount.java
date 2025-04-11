@@ -14,16 +14,6 @@ public class CheckingAccount extends BankAccount {
         this.overdraftLimit = overdraftLimit;
     }
 
-    @Override
-    public void withdraw(double amount) {
-        if (amount > 0 && amount <= getBalance() + overdraftLimit) {
-            setBalance(getBalance() - amount);
-            System.out.println("Withdrawn " + amount + " successfully.");
-        } else {
-            System.out.println("Amount exceeds overdraft limit or invalid. Overdraft limit: " + overdraftLimit );
-        }
-    }
-
     public double getOverdraftLimit() {
         return overdraftLimit;
     }

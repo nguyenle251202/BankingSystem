@@ -76,6 +76,8 @@ public class BankAccount {
         }
     }
 
+    // withdraw
+    // InsufficientFundsException
     public void withdraw(double amount) {
         if (amount > 0 && amount <= getBalance() + 2000) {
             setBalance(getBalance() - amount);
@@ -85,4 +87,14 @@ public class BankAccount {
         }
     }
 
+    //SavingsAccount
+    public void interest(int month) {
+        if (month > 0) {
+            setBalance(getBalance() * Math.pow(( 1 + 0.05), month));
+            System.out.println("Interested " + month + " months to " + ownerName);
+        }
+        else {
+            System.out.println("Cannot interest " + month + "months to " + ownerName);
+        }
+    }
 }

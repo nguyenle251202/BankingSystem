@@ -33,7 +33,8 @@ public class MainMenu {
         System.out.println("[1] - Add Account");
         System.out.println("[2] - Deposit account");
         System.out.println("[3] - Withdraw account");
-        System.out.println("[4] - Check amount");
+        System.out.println("[4] - Check Interest Rate");
+        System.out.println("[5] - Check amount");
         System.out.println("[0] - Exit Application");
         System.out.print("Chon chuc nang: ");
     }
@@ -45,7 +46,7 @@ public class MainMenu {
                 choice = scanner.nextInt();
                 scanner.nextLine();
 
-                if (choice >= 0 && choice <= 4) {
+                if (choice >= 0 && choice <= 5) {
                     return choice;
                 } else {
                     System.out.println("Lua chon khong hop le. Vui long chon tu 0 den 6.");
@@ -80,8 +81,18 @@ public class MainMenu {
                 MenuWithdraw.menuWithdraw(scanner, accountList);
                 break;
 
-            // Complete View
+            // Complete Interest
             case 4:
+                System.out.println("\n--- Check Interest Rate ---");
+                MenuInterest.calculateInterest(scanner, accountList);
+                break;
+
+            case 5:
+                System.out.println("\n--- Transfer money ---");
+                break;
+
+            // Complete View
+            case 6:
                 System.out.println("\n--- View all data ---");
                 View.displayAccountList(accountList);
                 break;
