@@ -87,6 +87,18 @@ public class BankAccount {
         }
     }
 
+    //transfer
+    public void transfer(double amount) {
+        if (amount > 0 && amount <= getBalance()) {
+            withdraw(amount);
+            System.out.println("Withdrawn " + amount + " successfully.");
+            deposit(amount);
+            System.out.println("Deposited " + amount + " to " + ownerName);
+        } else {
+            System.out.println("Cannot deposit \" + amount + \" to \" + ownerName + \" because the amount is negative");
+        }
+    }
+
     //SavingsAccount
     public void interest(int month) {
         if (month > 0) {

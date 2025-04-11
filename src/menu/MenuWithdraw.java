@@ -10,6 +10,7 @@ public class MenuWithdraw {
     public static void menuWithdraw(Scanner scanner, List<BankAccount> accountList) {
         System.out.print("\n--- Withdraw ---");
 
+        // InvalidAmountException
         if (accountList.isEmpty()) {
             System.out.println("No accounts found in the system. Cannot withdraw.");
             return;

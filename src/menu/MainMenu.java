@@ -46,7 +46,7 @@ public class MainMenu {
                 choice = scanner.nextInt();
                 scanner.nextLine();
 
-                if (choice >= 0 && choice <= 5) {
+                if (choice >= 0 && choice <= 6) {
                     return choice;
                 } else {
                     System.out.println("Lua chon khong hop le. Vui long chon tu 0 den 6.");
@@ -89,6 +89,7 @@ public class MainMenu {
 
             case 5:
                 System.out.println("\n--- Transfer money ---");
+                MenuTransfer.menuTransfer(scanner, accountList);
                 break;
 
             // Complete View
