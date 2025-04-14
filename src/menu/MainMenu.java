@@ -2,6 +2,8 @@ package menu;
 
 import infor.BankAccount;
 import infor.View;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +12,7 @@ public class MainMenu {
     private static List<BankAccount> accountList = View.getInitialAccountData();
     private static BankAccount selectedAccount;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
@@ -60,7 +62,7 @@ public class MainMenu {
         }
     }
 
-    private static void processChoice(int choice, Scanner scanner) {
+    private static void processChoice(int choice, Scanner scanner) throws IOException {
         switch (choice) {
 
             //Complete Add
