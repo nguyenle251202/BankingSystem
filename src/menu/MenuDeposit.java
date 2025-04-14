@@ -1,13 +1,15 @@
 package menu;
 
 import infor.BankAccount;
+import infor.export_log;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class MenuDeposit {
 
-    public static void menuDeposit(Scanner scanner, List<BankAccount> accountList) {
+    public static void menuDeposit(Scanner scanner, List<BankAccount> accountList) throws IOException {
         System.out.println("\n--- Deposit ---");
 
         // InvalidAmountException
@@ -69,7 +71,7 @@ public class MenuDeposit {
         System.out.print("Enter your choice: ");
     }
 
-    private static void depositAmount(Scanner scanner, BankAccount account) {
+    private static void depositAmount(Scanner scanner, BankAccount account) throws IOException {
         double amount = -1;
         while (amount <= 0) {
             System.out.print("Enter the amount to deposit (must be positive): ");
@@ -79,9 +81,11 @@ public class MenuDeposit {
                 amount = Double.parseDouble(input);
                 if (amount <= 0) {
                     System.out.println("Deposit amount must be positive. Try again.");
+                    export_log.logTransaction("Deposit amount must be positive. Try again.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a numeric value for the amount.");
+                export_log.logTransaction("Invalid input. Please enter a numeric value for the amount.");
                 amount = -1;
             }
         }
@@ -90,10 +94,13 @@ public class MenuDeposit {
             account.deposit(amount);
             System.out.printf("Successfully deposited %.2f. New balance: %.2f%n",
                     amount, account.getBalance());
+            export_log.logTransaction("Deposit " + amount + " to account " + account.getAccountNumber());
         } catch (IllegalArgumentException e) {
             System.out.println("Deposit failed: " + e.getMessage());
+            export_log.logTransaction("Deposit failed: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("An unexpected error occurred during deposit: " + e.getMessage());
+            export_log.logTransaction("An unexpected error occurred during deposit: " + e.getMessage());;
         }
     }
 

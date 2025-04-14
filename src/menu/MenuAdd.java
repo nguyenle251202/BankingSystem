@@ -1,12 +1,15 @@
 package menu;
 
 import infor.BankAccount;
+import infor.export_log;
+
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class MenuAdd {
-    public static void addAccount (Scanner scanner, List<BankAccount> accountList){
+    public static void addAccount (Scanner scanner, List<BankAccount> accountList) throws IOException {
         System.out.print("\n---Create account---");
 
         String accountNumber = "";
@@ -36,6 +39,7 @@ public class MenuAdd {
                 initialBalance = scanner.nextDouble();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a whole number for age.");
+                export_log.logTransaction("Invalid input. Please enter a whole number for age.");
                 scanner.next();
                 initialBalance = 0;
             }
@@ -48,5 +52,6 @@ public class MenuAdd {
         BankAccount newAccount = new BankAccount(null, accountNumber, ownerName, initialBalance);
         accountList.add(newAccount);
         System.out.println("Account created successfully!");
+        export_log.logTransaction("Create account " + accountNumber + "-" + ownerName + " successfully!");
     }
 }

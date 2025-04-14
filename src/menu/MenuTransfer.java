@@ -1,13 +1,15 @@
 package menu;
 
 import infor.BankAccount;
+import infor.export_log;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
 public class MenuTransfer {
 
-    public static void menuTransfer(Scanner scanner, List<BankAccount> accountList) {
+    public static void menuTransfer(Scanner scanner, List<BankAccount> accountList) throws IOException {
 
         System.out.println("\n--- Transfer ---");
 
@@ -48,7 +50,7 @@ public class MenuTransfer {
         }
     }
 
-    private static void transferAmount(Scanner scanner, BankAccount accountFrom, BankAccount accountTo) {
+    private static void transferAmount(Scanner scanner, BankAccount accountFrom, BankAccount accountTo) throws IOException {
         System.out.println("\nEnter the amount  to transfer from: " + accountFrom.getAccountNumber());
         double amount = -1;
 
@@ -60,9 +62,11 @@ public class MenuTransfer {
                 amount = Double.parseDouble(input);
                 if (amount <= 0) {
                     System.out.println("Amount must be transfer");
+                    export_log.logTransaction("Amount must be transfer");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a valid number.");
+                export_log.logTransaction("Invalid input. Please enter a valid number.");
                 amount = -1;
             }
         }
@@ -71,10 +75,13 @@ public class MenuTransfer {
             accountFrom.withdraw(amount);
             accountTo.deposit(amount);
             System.out.printf("Transfer successful %.2f withdrawn from " + accountFrom.getAccountNumber() + " to " + accountTo.getAccountNumber(), amount);
+            export_log.logTransaction( "Transfer successful " + amount + " from " + accountFrom.getAccountNumber() + " to " + accountTo.getAccountNumber());
         } catch (IllegalArgumentException e) {
             System.out.println("Transfer failed: " + e.getMessage());
+            export_log.logTransaction("Transfer failed: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("An unexpected error occurred during transfer" + e.getMessage());
+            export_log.logTransaction("An unexpected error occurred during transfer" + e.getMessage());
         }
     }
 
