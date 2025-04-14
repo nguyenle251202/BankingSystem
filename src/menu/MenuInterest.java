@@ -1,6 +1,6 @@
 package menu;
 
-import infor.BankAccount;
+import infor.declare.BankAccount;
 
 import java.util.List;
 import java.util.Scanner;

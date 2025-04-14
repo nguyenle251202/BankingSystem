@@ -1,4 +1,4 @@
-package infor;
+package infor.declare;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

@@ -1,9 +1,11 @@
 package infor;
 
+import infor.declare.BankAccount;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class View {
+public class ViewAccount {
     public static List<BankAccount> getInitialAccountData() {
         List<BankAccount> initialList = new ArrayList<>();
 

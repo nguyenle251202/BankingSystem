@@ -1,7 +1,10 @@
 package menu;
 
-import infor.BankAccount;
-import infor.View;
+import infor.declare.BankAccount;
+import infor.ViewAccount;
+import infor.infor_menu.MenuItem;
+import infor.infor_menu.MenuManager;
+import infor.infor_menu.MenuSetup;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,109 +12,95 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-    private static List<BankAccount> accountList = View.getInitialAccountData();
-    private static BankAccount selectedAccount;
+    private static List<BankAccount> accountList = ViewAccount.getInitialAccountData();
+
+    private static MenuManager menuManager = new MenuManager(MenuSetup.createSampleMenuItems());
 
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            displayMenu();
-            int choice = selectChoice(scanner);
+            menuManager.displayCurrentPage();
 
-            if (choice == 0) {
-                System.out.println("Thoat app.");
-                scanner.close();
-                break;
+            String input = scanner.nextLine().trim().toLowerCase();
+
+            if (input.equals("n")) {
+                if (!menuManager.nextPage()) {
+                    System.out.println("Already on the last page.");
+                }
+                continue;
             }
 
-            processChoice(choice, scanner);
+            if (input.equals("p")) {
+                if (!menuManager.previousPage()) {
+                    System.out.println("Already on the first page.");
+                }
+                continue;
+            }
+
+            try {
+                int choice = Integer.parseInt(input);
+                MenuItem selectedItem = menuManager.getItemByPageChoice(choice);
+
+                if (selectedItem != null) {
+                    String actionKey = selectedItem.getAddressLayer();
+
+                    if ("00".equals(actionKey)) {
+                        System.out.println("Exiting application.");
+                        break;
+                    }
+
+                    processChoice(actionKey, scanner);
+
+                    System.out.println("\nPress Enter to return to the main menu...");
+                    scanner.nextLine();
+
+                } else {
+                    System.out.println("Invalid choice number for this page. Please try again.");
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number, 'n', or 'p'.");
+            } catch (IOException e) {
+                System.err.println("An error occurred during the operation: " + e.getMessage());
+                System.out.println("\nPress Enter to return to the main menu...");
+                scanner.nextLine();
+            }
         }
+
+        scanner.close();
         System.out.println("Application finished.");
     }
 
-    public static void displayMenu() {
-        System.out.println("\n--- Main Menu ---");
-        System.out.println("[1] - Add Account");
-        System.out.println("[2] - Deposit account");
-        System.out.println("[3] - Withdraw account");
-        System.out.println("[4] - Check Interest Rate");
-        System.out.println("[5] - Check amount");
-        System.out.println("[0] - Exit Application");
-        System.out.print("Chon chuc nang: ");
-    }
-
-    private static int selectChoice(Scanner scanner) {
-        int choice = -1;
-        while (true) {
-            if (scanner.hasNextInt()) {
-                choice = scanner.nextInt();
-                scanner.nextLine();
-
-                if (choice >= 0 && choice <= 6) {
-                    return choice;
-                } else {
-                    System.out.println("Lua chon khong hop le. Vui long chon tu 0 den 6.");
-                    System.out.print("Chon chuc nang: ");
-                }
-            } else {
-                System.out.println("Nhap sai dinh dang. Vui long nhap mot so.");
-                scanner.next();
-                System.out.print("Chon chuc nang: ");
-            }
-        }
-    }
-
-    private static void processChoice(int choice, Scanner scanner) throws IOException {
-        switch (choice) {
-
-            //Complete Add
-            case 1:
+    private static void processChoice(String actionKey, Scanner scanner) throws IOException {
+        switch (actionKey) {
+            case "01":
                 System.out.println("\n--- Add Account ---");
                 MenuAdd.addAccount(scanner, accountList);
                 break;
-
-            // Complete Deposit
-            case 2:
+            case "02":
                 System.out.println("\n--- Deposit Account ---");
                 MenuDeposit.menuDeposit(scanner, accountList);
                 break;
-
-            // Complete Withdraw
-            case 3:
+            case "03":
                 System.out.println("\n--- Withdraw Account ---");
                 MenuWithdraw.menuWithdraw(scanner, accountList);
                 break;
-
-            // Complete Interest
-            case 4:
+            case "04":
                 System.out.println("\n--- Check Interest Rate ---");
                 MenuInterest.calculateInterest(scanner, accountList);
                 break;
-
-            case 5:
+            case "05":
                 System.out.println("\n--- Transfer money ---");
                 MenuTransfer.menuTransfer(scanner, accountList);
                 break;
-
-            // Complete View
-            case 6:
+            case "06":
                 System.out.println("\n--- View all data ---");
-                View.displayAccountList(accountList);
-                break;
-            case 0:
+                ViewAccount.displayAccountList(accountList);
                 break;
             default:
-                System.out.println("Lua chon khong hop le.");
+                System.out.println("Unknown menu action key: " + actionKey);
                 break;
         }
-    }
-
-    public static BankAccount getSelectedAccount() {
-        return selectedAccount;
-    }
-
-    public static void setSelectedAccount(BankAccount selectedAccount) {
-        MainMenu.selectedAccount = selectedAccount;
     }
 }

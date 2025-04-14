@@ -1,6 +1,6 @@
 package infor.overdraft;
 
-import infor.BankAccount;
+import infor.declare.BankAccount;
 
 public class CheckingAccount extends BankAccount {
     public double overdraftLimit = 2000;

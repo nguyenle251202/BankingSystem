@@ -1,6 +1,6 @@
 package menu;
 
-import infor.BankAccount;
+import infor.declare.BankAccount;
 import infor.export_log;
 
 import java.io.IOException;

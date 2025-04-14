@@ -2,3 +2,4 @@
 [10:12:19_14/04/2025]Transaction: Create account EX005-Le Vu The Lan successfully!
 [10:12:49_14/04/2025]Transaction: Deposit 30.0 to account ex2-003
 [10:13:40_14/04/2025]Transaction: Transfer successful 20.0 from ex2-001 to EX005
+[14:39:25_14/04/2025]Transaction: Create account ex004-NguyenLam successfully!

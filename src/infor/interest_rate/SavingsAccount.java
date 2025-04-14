@@ -1,6 +1,6 @@
 package infor.interest_rate;
 
-import infor.BankAccount;
+import infor.declare.BankAccount;
 
 public class SavingsAccount extends BankAccount {
     public double interestRate = 0.05 ;
