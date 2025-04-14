@@ -1,4 +1,4 @@
 package exception_handling;
 
-public class InsufficientFundsException {
+public class InsufficientFundsException extends Throwable {
 }

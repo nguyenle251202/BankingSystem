@@ -25,6 +25,9 @@ public class BankAccount {
     public BankAccount(String accountNumber, String ownerName, double balance) {
     }
 
+    public BankAccount(String s, double v) {
+    }
+
     // Getters
     public String getId() {
         return id;
